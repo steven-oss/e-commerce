@@ -1,0 +1,22 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" // 可以改为 "mysql", "sqlite", "sqlserver" 等
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  isValidEmail Int   @default(0)  // 0 = 未验证, 1 = 已验证
+  otpCode String?   // 可选，验证后可以为空   
+  name      String?
+  password     String
+}
+
+
